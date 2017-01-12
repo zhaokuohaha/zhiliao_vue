@@ -1,56 +1,16 @@
 <template>
     <div class="text-center">
         <img src="../assets/logo.png" alt="">
-        <h2>登录</h2>
-        <mu-text-field v-model="useremail" hintText="邮箱"/><br/>
-        <mu-text-field v-model="password" hintText="密码"/><br/>
-        <mu-raised-button class="gap-button" label="登录" icon="android" primary
-            @click="dologin"/>
-        <mu-raised-button @click="testaxios">axios测试</mu-raised-button>
-        <router-link to="/account/forgotpassword">找回密码</router-link>
+        <h1>知了客户端</h1>
+        <h2>
+            知了是一个简单方便的跨平台移动通知应用系统, 支持软件通知, 邮箱通知, 短信通知三种通知方式.
+        </h2>
+            <p icon="home" label="作者">
+                <i class="mudocs-icon-custom-github"></i>项目作者 : zhaokuohaha 
+            </p>
+            <p>
+                <i class="mudocs-icon-home"></i>项目地址 : http://github.com/zhaokuohaha/zhiliao_one
+            </p>
     </div>
 </template>
 
-<script>
-    import axios from 'axios'
-
-
-    export default{
-        data(){
-            return{
-                useremail:'1014336691@qq.com',
-                password:'123qwe',
-            }
-        },
-        methods: {
-            dologin(){
-                var udata = this;
-                console.log(udata.useremail+"="+udata.password);
-               axios.post('/api/account/login',{
-                        "email":udata.useremail,
-                        "password":udata.password
-                }).then(function(res){
-                    console.log(res.data.access_token);
-                    udata.$store.commit('updateToken',res.data.access_token);
-                    udata.$store.commit('login');
-                });
-            },
-
-            testaxios(){
-                console.log("axiostest");
-                axios.get('http://ip.taobao.com//service/getIpInfo.php?ip=49.52.99.27')
-                .then(function(res){
-                    console.info(res);
-                }).catch(function(err){
-                    console.error(err);
-                })
-            }
-        }
-    }
-</script>
-
-<style lang="">
-    .gap-button{
-        margin: 30px;
-    }
-</style>

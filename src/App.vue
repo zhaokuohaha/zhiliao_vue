@@ -20,8 +20,8 @@
                   <img src="./assets/logo.png" alt="">
                 </mu-card-media>
                 <div class="text-center">
-                  <router-link to="/login"><mu-raised-button label="登录" class="demo-raised-button" primary/></router-link>
-                  <router-link to="/register"><mu-raised-button label="注册" class="demo-raised-button"/></router-link>
+                  <router-link to="/account/login"><mu-raised-button label="登录" class="demo-raised-button" primary/></router-link>
+                  <router-link to="/account/register"><mu-raised-button label="注册" class="demo-raised-button"/></router-link>
                 </div>
               </div>
               <mu-list>

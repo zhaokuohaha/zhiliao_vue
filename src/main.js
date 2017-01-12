@@ -11,6 +11,9 @@ import axios from 'axios'
 // 自定义组件
 import App from './App'
 import Home from './components/Home'
+import Account from './components/Account/index'
+import Login from './components/Account/login'
+import Register from './components/Account/register'
 
 //状态管理: vuex 
 import store from './store'
@@ -25,6 +28,18 @@ const routes = [{
 },{
   path:'/home',
   component:Home,
+},{
+  path:'/account',
+  component:Account,
+  children:[
+    {
+      path:'login',
+      component:Login,
+    },{
+      path:'register',
+      component:Register
+    }
+  ]
 }];
 
 const router = new VueRouter({
