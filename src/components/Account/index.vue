@@ -1,6 +1,20 @@
 <template>
     <div class="container">
-        <h1>this is user route</h1>
+        <div class="text-center">
+            <div class="avatarImage image-primary">
+            </div>
+        </div>
         <router-view></router-view>
     </div>
 </template>
+
+
+<style>
+    .image-primary{
+        width: 200px;
+        height: 200px;
+        margin: 20px auto;
+        background-image: url(../../assets/zhaokuohaha.jpg);
+        background-size: cover;
+    }
+</style>
