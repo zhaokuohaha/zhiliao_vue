@@ -9,6 +9,7 @@ Vue.use(Vuex);
 const state =  {
     islogin:false,
     jwtToken:'hello token',
+    userid:'userid',
 };
 
 export default new Vuex.Store({

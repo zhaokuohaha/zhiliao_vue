@@ -7,6 +7,7 @@
                   <mu-card>
                     <mu-card-media>
                       <img  :src="avater" class="avatarImage">
+                      <div class="save-avatar">更改头像</div>
                     </mu-card-media>
                     <mu-card-title :title="username" :subTitle="summary" />
                     <mu-card-actions class="text-center">
@@ -43,7 +44,7 @@
         summary:'知了应用开发者',
         open: false,
         docked:true,
-        avater:'./assets/zhaokuohaha.jpg',
+        avater:'http://localhost:50521/api/Account/getavatar/68abc327-4e78-4e87-b995-74559d19b2c7',
       }
     },
     methods: {
@@ -66,5 +67,10 @@
 
   .text-center{
     text-align: center;
+  }
+
+  .save-avatar{
+    position: fixed;
+    background: rgba(33, 33, 33, .5)
   }
 </style>
