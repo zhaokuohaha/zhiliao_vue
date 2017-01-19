@@ -6,10 +6,10 @@
               <div class="userinfomation" v-if="this.$store.state.islogin">
                   <mu-card>
                     <mu-card-media>
+                      <div class="save-avatar" @click="open"></div>
                       <img  :src="avater" class="avatarImage">
-                      <div class="save-avatar">更改头像</div>
-                    </mu-card-media>
                     <mu-card-title :title="username" :subTitle="summary" />
+                    </mu-card-media>
                     <mu-card-actions class="text-center">
                       <router-link to="/userinfo">个人信息</router-link>
                       <mu-flat-button label="退出登录" @click="logoff"/>
@@ -25,6 +25,7 @@
                   <router-link to="/account/register"><mu-raised-button label="注册" class="demo-raised-button"/></router-link>
                 </div>
               </div>
+              <div is="component-upload"></div>
               <mu-list>
                 <mu-list-item>菜单2</mu-list-item>
                 <mu-list-item>菜单3</mu-list-item>
@@ -37,14 +38,16 @@
 </template>
 
 <script>
-  export default{
+import uploadAvatar from './components/Common/UploadAvatar'
+
+export default{
     data(){
       return{
         username:'zhaokuo',
         summary:'知了应用开发者',
         open: false,
         docked:true,
-        avater:'http://localhost:50521/api/Account/getavatar/68abc327-4e78-4e87-b995-74559d19b2c7',
+        avater:'http://cttf-10068775.cos.myqcloud.com/QQ%E6%88%AA%E5%9B%BE20161221144932.png',
       }
     },
     methods: {
@@ -55,6 +58,9 @@
       logoff(){
         console.log("logoff");
       }
+    },
+    components:{
+      'component-upload':uploadAvatar,
     }
   }
 </script>
@@ -62,6 +68,7 @@
 <style>
   .avatarImage{
     padding: 10px;
+    height: 200px;
     border-radius: 50%;
   }
 
@@ -71,6 +78,16 @@
 
   .save-avatar{
     position: fixed;
-    background: rgba(33, 33, 33, .5)
+    width: 100%;
+    text-align: center;
+    height: 200px;
+    line-height: 200px;
+  }
+  .save-avatar:hover{
+    cursor: pointer;
+    background: rgba(33, 33, 33, .5);    
+    background-repeat: no-repeat;
+    background-image: url(./assets/相机.png);
+    background-position: center;
   }
 </style>
