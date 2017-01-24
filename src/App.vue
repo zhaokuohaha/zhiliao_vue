@@ -34,6 +34,11 @@
           </mu-icon-button>
       </mu-appbar>
       <router-view></router-view>
+
+      <div class="footer">
+        <hr>
+        版权所有 &copy www.zhaokuo.cc
+      </div>
     </div>
 </template>
 
@@ -89,5 +94,12 @@ export default{
     background-repeat: no-repeat;
     background-image: url(./assets/相机.png);
     background-position: center;
+  }
+  .footer{
+    text-align:center;
+    margin: 15px;
+  }
+  .footer-hr{
+    width: 300px;
   }
 </style>
