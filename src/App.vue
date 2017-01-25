@@ -6,8 +6,8 @@
               <div class="userinfomation" v-if="this.$store.state.islogin">
                   <mu-card>
                     <mu-card-media>
-                      <div class="save-avatar" @click="open"></div>
-                      <img  :src="avater" class="avatarImage">
+                      <div is="component-upload"></div>
+                      
                     <mu-card-title :title="username" :subTitle="summary" />
                     </mu-card-media>
                     <mu-card-actions class="text-center">
@@ -25,7 +25,6 @@
                   <router-link to="/account/register"><mu-raised-button label="注册" class="demo-raised-button"/></router-link>
                 </div>
               </div>
-              <div is="component-upload"></div>
               <mu-list>
                 <mu-list-item>菜单2</mu-list-item>
                 <mu-list-item>菜单3</mu-list-item>
@@ -52,7 +51,7 @@ export default{
         summary:'知了应用开发者',
         open: false,
         docked:true,
-        avater:'http://cttf-10068775.cos.myqcloud.com/QQ%E6%88%AA%E5%9B%BE20161221144932.png',
+       
       }
     },
     methods: {
@@ -65,7 +64,7 @@ export default{
       }
     },
     components:{
-      'component-upload':uploadAvatar,
+      'component-upload':uploadAvatar
     }
   }
 </script>
@@ -77,10 +76,6 @@ export default{
     border-radius: 50%;
   }
 
-  .text-center{
-    text-align: center;
-  }
-
   .save-avatar{
     position: fixed;
     width: 100%;
@@ -88,6 +83,12 @@ export default{
     height: 200px;
     line-height: 200px;
   }
+
+  .text-center{
+    text-align: center;
+  }
+
+
   .save-avatar:hover{
     cursor: pointer;
     background: rgba(33, 33, 33, .5);    
