@@ -32,6 +32,7 @@
                     console.log(res.data.access_token);
                     udata.$store.commit('updateToken',res.data.access_token);
                     udata.$store.commit('login',res.data.userid);
+                    this._router.push('/');
                 });
             },
         }

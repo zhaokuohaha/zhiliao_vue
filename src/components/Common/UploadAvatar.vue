@@ -29,16 +29,5 @@ export default {
 }
 </script>
 <style>
-   .avatarImage{
-    padding: 10px;
-    height: 200px;
-    border-radius: 50%;
-  }
-  .save-avatar{
-    position: fixed;
-    width: 100%;
-    text-align: center;
-    height: 200px;
-    line-height: 200px;
-  }
+
 </style>
