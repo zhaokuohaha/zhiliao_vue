@@ -67,7 +67,6 @@
         console.log("logoff");
       },
       toHome(){
-        console.log(this._router);
         this._router.push('/');
       }
     },

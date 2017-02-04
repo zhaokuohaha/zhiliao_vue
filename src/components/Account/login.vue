@@ -35,7 +35,7 @@
                     this._router.push('/');
                 });
             },
-        }
+        }  
     }
 </script>
 

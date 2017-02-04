@@ -18,6 +18,9 @@ import Register from './components/Account/register'
 //状态管理: vuex 
 import store from './store'
 
+//本地存储: localStorage
+import localStorage from './store/localStorage.js'
+
 Vue.use(VueRouter)
 Vue.use(MuseUI)
 

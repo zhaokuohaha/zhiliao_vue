@@ -1,3 +1,5 @@
+import localStorage from './localStorage.js'
+
 export default{
     login(state,userid){
       state.islogin = true;
@@ -5,5 +7,6 @@ export default{
     },
     updateToken(state,token){
       state.jwtToken = "Bearer "+token;
+      localStorage.save('token',token);
     }
 }
