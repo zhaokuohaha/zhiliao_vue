@@ -14,6 +14,7 @@ import Home from './components/Home'
 import Account from './components/Account/index'
 import Login from './components/Account/login'
 import Register from './components/Account/register'
+import Tasklist from './components/Task/tasklist'
 
 //状态管理: vuex 
 import store from './store'
@@ -28,10 +29,12 @@ Vue.use(MuseUI)
 const routes = [{
   path:'/',
   component:Home,
-},{
+},
+{
   path:'/home',
   component:Home,
-},{
+},
+{
   path:'/account',
   component:Account,
   children:[
@@ -43,7 +46,12 @@ const routes = [{
       component:Register
     }
   ]
-}];
+},
+{
+  path: '/tasklist',
+  component: Tasklist,
+}
+];
 
 const router = new VueRouter({
   routes
@@ -53,7 +61,7 @@ const router = new VueRouter({
 //axios配置
 axios.defaults.baseURL='http://localhost:50521';
 axios.defaults.headers.common['Authorization'] = store.state.jwtToken;
-
+axios.defaults.headers.common["userid"] = store.state.userid;
 
 
 /* eslint-disable no-new */

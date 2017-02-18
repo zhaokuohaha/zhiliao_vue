@@ -64,6 +64,7 @@
         this.docked = !flag
       },
       logoff() {
+        this.$store.commit('logoff');
         console.log("logoff");
       },
       toHome(){
