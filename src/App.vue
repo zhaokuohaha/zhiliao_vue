@@ -1,13 +1,13 @@
 <template>
   <div class="wrapper">
     <mu-appbar title="Title">
-      <mu-icon-button icon='menu' slot="left" @click="toggle(true)" />
+      <mu-icon-button icon='menu' slot="left" @click="toggle(true)" /></mu-icon-button>
+      <mu-icon-button icon='home' slot="left" @click="toHome"></mu-icon-button>
       <mu-drawer :open="open" :docked="docked" @close="toggle()" >
         <div class="userinfomation" v-if="this.$store.state.islogin">
           <mu-card>
             <mu-card-media>
               <div is="component-upload"></div>
-
               <mu-card-title :title="username" :subTitle="summary" />
             </mu-card-media>
             <mu-card-actions class="text-center">
@@ -30,13 +30,17 @@
           </div>
         </div>
         <mu-list>
-          <mu-list-item>菜单2</mu-list-item>
-          <mu-list-item>菜单3</mu-list-item>
+          <mu-list-item   title="任务管理" toggleNested>
+            <mu-list-item slot="nested" title="新建任务" href="#/task/newTask">
+            </mu-list-item>
+            <mu-list-item slot="nested" title="已发送任务" href="#/task/sentTasks">
+            </mu-list-item>
+          </mu-list-item>
+          <mu-list-item title="群管理" toggleNested>
+            <mu-list-item slot="nested" title="我的群" href="#/group/myGroup"></mu-list-item>
+          </mu-list-item>
         </mu-list>
       </mu-drawer>
-      </mu-icon-button>
-      <mu-icon-button icon='home' slot="left" @click="toHome">
-      </mu-icon-button>
     </mu-appbar>
     <router-view></router-view>
     <div class="footer">
@@ -79,6 +83,10 @@
 
 <style>
 
+  a{
+    font-size: 18px;
+    color: #00acc1;
+  }
   .save-avatar{
     position: fixed;
     width: 100%;

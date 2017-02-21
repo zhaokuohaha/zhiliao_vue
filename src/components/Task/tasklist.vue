@@ -1,6 +1,6 @@
 <template>
     <div class="tasklist">
-        <h1>任务列表</h1>
+        <h1>任务列表<mu-icon-button icon="refresh" size="48" @click="getTasks"></mu-icon-button></h1>
         <mu-list>
             <mu-list-item v-for="(item,index) in tasks" :title="item.owner">
                  <mu-avatar :src="item.avatar" slot="leftAvatar"/>
@@ -17,9 +17,11 @@
             </mu-list-item>
         </mu-list>
         <mu-dialog :open="dialog" @close="hideDetail">
-            <mu-chip backgroundColor="white">
-                <mu-avatar :size="42" :src="activetask.avatar" />{{activetask.owner}}
-            </mu-chip>
+            <mu-list>
+                <mu-list-item :title=activetask.owner disabled>
+                    <mu-avatar slot="left" :size="42" :src="activetask.avatar" />
+                </mu-list-item>
+            </mu-list>
              <mu-card-title :title="activetask.title"/>
              <p><mu-icon value="access_time"></mu-icon>  {{activetask.time}}</p>
              <p><mu-icon value="location_on"></mu-icon>  {{activetask.address}}</p>
@@ -32,7 +34,7 @@
 <script>
     import axios from 'axios';
 
-    export default{
+    export default {
         data () {
             return {
                 dialog:false,
@@ -58,6 +60,10 @@
                 }]
             }
         },
+        mounted () {
+            //console.log("参考官方文档: 实例 - 生命周期");
+            this.getTasks();
+        },
         methods: {
             getTasks(){
                 axios.get('/api/Task/tasklist').then(function(res){
@@ -69,7 +75,12 @@
                 })
             },
             setRead(item){
-                item.state = true;
+                axios.post('/api/Task/setread',{id:1}).then(function(res){
+                    console.log("设置已读成功");
+                    item.state = true;
+                }).catch(function(error){
+                    console.error("设置已读失败");
+                })
             },
             showDetail(task){
                 this.activetask = task;
@@ -80,5 +91,5 @@
                 this.dialog = false;
             }
         }
-    }
+    };
 </script>
