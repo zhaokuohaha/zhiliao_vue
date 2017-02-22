@@ -1,6 +1,5 @@
 <template>
     <div class="text-center">
-        <img src="../../assets/logo.png" alt="">
         <h2>登录</h2>
         <mu-text-field v-model="useremail" hintText="邮箱"/><br/>
         <mu-text-field v-model="password" hintText="密码"/><br/>

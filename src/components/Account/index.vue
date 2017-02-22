@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="text-center">
-            <div class="avatarImage image-primary">
+            <div class="image-primary">
             </div>
         </div>
         <router-view></router-view>
@@ -14,6 +14,7 @@
         width: 200px;
         height: 200px;
         margin: 20px auto;
+        border-radius: 100px;
         background-image: url(../../assets/zhaokuohaha.jpg);
         background-size: cover;
     }
