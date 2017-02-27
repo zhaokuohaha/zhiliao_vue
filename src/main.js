@@ -15,8 +15,7 @@ Vue.use(MuseUI)
 import axios from 'axios'
 //axios配置
 axios.defaults.baseURL='http://localhost:50521';
-axios.defaults.headers.common['Authorization'] = store.state.jwtToken;
-axios.defaults.headers.common["userid"] = store.state.userid;
+
 
 
 /* eslint-disable no-new */

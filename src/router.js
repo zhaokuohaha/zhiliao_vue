@@ -4,10 +4,19 @@ import VueRouter from 'vue-router'
 // 自定义组件
 
 import Home from './components/Home'
+//Account
 import Account from './components/Account/index'
 import Login from './components/Account/login'
 import Register from './components/Account/register'
+
+//Task
+import TaskIndex from './components/Task/index'
 import Tasklist from './components/Task/tasklist'
+
+//Group
+import GroupIndex from './components/Group/index'
+import CreateGroup from './components/Group/creategroup'
+
 
 Vue.use(VueRouter)
 //路由配置
@@ -28,9 +37,21 @@ const routes = [{
             component:Register
         }]
     },{
-        path: '/tasklist',
-        component: Tasklist,
-    }];
+        path: '/task',
+        component: TaskIndex,
+        children:[{
+            path:'taskList',
+            component:Tasklist,
+        }]
+    },{
+        path:'/group',
+        component:GroupIndex,
+        children:[{
+            path:'createGroup',
+            component:CreateGroup
+        }]
+    }
+];
 
 export const router = new VueRouter({
   routes

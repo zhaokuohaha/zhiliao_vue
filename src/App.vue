@@ -30,14 +30,15 @@
           </div>
         </div>
         <mu-list>
-          <mu-list-item   title="任务管理" toggleNested>
-            <mu-list-item slot="nested" title="新建任务" href="#/task/newTask">
-            </mu-list-item>
-            <mu-list-item slot="nested" title="已发送任务" href="#/task/sentTasks">
-            </mu-list-item>
+          <mu-list-item   title="通知管理" toggleNested>
+            <mu-list-item slot="nested" title="所有通知" href="#/task/taskList"></mu-list-item>            
+            <mu-list-item slot="nested" title="新建通知" href="#/task/newTask"></mu-list-item>
+            <mu-list-item slot="nested" title="已发送通知" href="#/task/sentTasks"></mu-list-item>
           </mu-list-item>
           <mu-list-item title="群管理" toggleNested>
             <mu-list-item slot="nested" title="我的群" href="#/group/myGroup"></mu-list-item>
+            <mu-list-item slot="nested" title="创建群" href="#/group/createGroup"></mu-list-item>
+            <mu-list-item slot="nested" title="加入群" href="#/group/joinGroup"></mu-list-item>
           </mu-list-item>
         </mu-list>
       </mu-drawer>
@@ -82,36 +83,12 @@
 </script>
 
 <style>
-
   a{
     font-size: 18px;
     color: #00acc1;
   }
-  .save-avatar{
-    position: fixed;
-    width: 100%;
-    text-align: center;
-    height: 200px;
-    line-height: 200px;
-  }
-  .avatarImage{
-    padding: 10px;
-    height: 200px;
-    border-radius: 50%;
-    width: 100%;
-  }
-
   .text-center{
     text-align: center;
-  }
-
-
-  .save-avatar:hover{
-    cursor: pointer;
-    background: rgba(33, 33, 33, .5);    
-    background-repeat: no-repeat;
-    background-image: url(./assets/相机.png);
-    background-position: center;
   }
   .footer{
     text-align:center;
