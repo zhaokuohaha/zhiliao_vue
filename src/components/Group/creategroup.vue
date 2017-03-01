@@ -30,8 +30,12 @@
                 var g = this.group;
                 axios.post('/api/Group/greategroup',g)
                     .then(function(response){
-                        console.log(response)
-                    });
+                        console.log(response);
+                        
+                    })
+                    .catch(function(msg){
+                        console.error(msg);
+                    })
             }
         }
     }

@@ -16,6 +16,7 @@ import Tasklist from './components/Task/tasklist'
 //Group
 import GroupIndex from './components/Group/index'
 import CreateGroup from './components/Group/creategroup'
+import myGroup from './components/Group/mygroup'
 
 
 Vue.use(VueRouter)
@@ -49,6 +50,9 @@ const routes = [{
         children:[{
             path:'createGroup',
             component:CreateGroup
+        },{
+            path:'myGroup',
+            component:myGroup
         }]
     }
 ];
