@@ -21,7 +21,7 @@
                     v-for="(item,index) in groups" 
                     v-if="item.ismine == true" 
                     :title="item.name"
-                    disabled="true">
+                    disabled>
                     <mu-avatar :src="item.imagepath" slot="leftAvatar"/>
                     <span slot="describe">简介: {{item.summary}}</span>
                 </mu-list-item>

@@ -1,8 +1,8 @@
 <template>
     <div class="text-center">
         <h2>登录</h2>
-        <mu-text-field v-model="useremail" label="邮箱"/><br/>
-        <mu-text-field v-model="password" label="密码"/><br/>
+        <mu-text-field labelFloat v-model="useremail" label="邮箱"/><br/>
+        <mu-text-field labelFloat v-model="password" label="密码"/><br/>
         <mu-raised-button class="gap-button" label="登录" icon="android" primary
             @click="dologin"/>
         <router-link to="/account/forgotpassword">找回密码</router-link>

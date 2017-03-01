@@ -97,4 +97,7 @@
   .footer-hr{
     width: 300px;
   }
+  .zl-big-icon{
+    font-size: 36px;
+  }
 </style>
