@@ -17,7 +17,7 @@ import Tasklist from './components/Task/tasklist'
 import GroupIndex from './components/Group/index'
 import CreateGroup from './components/Group/creategroup'
 import myGroup from './components/Group/mygroup'
-
+import userList from './components/Group/userlist'
 
 Vue.use(VueRouter)
 //路由配置
@@ -53,6 +53,9 @@ const routes = [{
         },{
             path:'myGroup',
             component:myGroup
+        },{
+            path:'userList',
+            component:userList
         }]
     }
 ];

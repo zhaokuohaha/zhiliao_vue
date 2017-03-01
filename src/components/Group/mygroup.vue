@@ -19,12 +19,11 @@
                 <mu-sub-header>我加入的群</mu-sub-header>
                 <mu-list-item 
                     v-for="(item,index) in groups" 
-                    v-if="item.ismine == false" 
+                    v-if="item.ismine == true" 
                     :title="item.name"
                     disabled="true">
                     <mu-avatar :src="item.imagepath" slot="leftAvatar"/>
                     <span slot="describe">简介: {{item.summary}}</span>
-                    <!--<mu-icon-button tooltip="删除群" iconClass="zl-delete-icon" slot="right" icon="delete" @click="deleteGroup()"/>-->
                 </mu-list-item>
             </mu-list>
         </mobile-tear-sheet>
@@ -66,6 +65,7 @@
                     })
             },
             showUsers(){
+                this.$router.push('userList');
                 console.log("显示用户数量");
             },
             deleteGroup(){
