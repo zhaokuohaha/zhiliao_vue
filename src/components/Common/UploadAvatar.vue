@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -52,9 +53,15 @@ export default {
       var element = document.getElementById('upload');
       var formData = new FormData();
       formData.append('files', element.files[0]);
-      var request = new XMLHttpRequest();
-      request.open("POST", "http://localhost:50521//api/User/uploadimage"); // change to your URL
-      request.send(formData);
+      axios.post('/api/User/uploadimage',formData)
+        .then(function(res){
+          console.log(res);
+        }).catch(function(msg){
+          console.error(msg)
+        })
+      // var request = new XMLHttpRequest();
+      // request.open("POST", "http://localhost:50521/api/User/uploadimage"); // change to your URL
+      // request.send(formData);
       this.isUploadButton = false;
     }
   }
