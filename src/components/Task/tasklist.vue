@@ -75,7 +75,7 @@
                 })
             },
             setRead(item){
-                axios.post('/api/Task/setreaded',{id:1}).then(function(res){
+                axios.post('/api/Task/setreaded',{value:1}).then(function(res){
                     console.log("设置已读成功");
                     item.state = true;
                 }).catch(function(error){

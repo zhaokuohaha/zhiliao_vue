@@ -12,6 +12,9 @@
     <mu-flat-button slot="actions" @click="close" primary label="取消"/>
     <mu-flat-button slot="actions" primary @click="close" label="确定"/>
   </mu-dialog>
+  <mu-popup position="top" :overlay = "false" :open="toppop">
+      {{toppopmsg}}
+  </mu-popup>
 </div>
 </template>
 
@@ -20,6 +23,8 @@ import axios from 'axios'
 export default {
   data () {
     return {
+      toppop:false,
+      toppopmsg:'',
       dialog: false,
       isUploadButton:false,
        avater:'http://cttf-10068775.cos.myqcloud.com/QQ%E6%88%AA%E5%9B%BE20161221144932.png',
@@ -50,12 +55,21 @@ export default {
       reader.readAsDataURL(file);
     },
     uploadAvatar(){
+      var tvm = this;
       var element = document.getElementById('upload');
       var formData = new FormData();
       formData.append('files', element.files[0]);
-      axios.post('/api/User/uploadimage',formData)
+      var instance = axios.create({headers:{'groupname':'testgroup'}});
+      instance.post('/api/User/uploadimage',formData)
         .then(function(res){
           console.log(res);
+          if(res.data.code != 0)
+            tvm.toppopmsg = '更新失败, 请联系管理员';
+          else{
+              tvm.toppopmsg = '更新成功';
+              tvm.saveAvatar(res.data.data.access_url);
+            }
+            tvm.toppop = true;
         }).catch(function(msg){
           console.error(msg)
         })
@@ -63,6 +77,18 @@ export default {
       // request.open("POST", "http://localhost:50521/api/User/uploadimage"); // change to your URL
       // request.send(formData);
       this.isUploadButton = false;
+    },
+    saveAvatar(url){
+      axios.post('/api/User/saveavatar',{value:url});
+    }
+  },
+  watch: {
+    toppop (val) {
+      if (val) {
+        setTimeout(() => {
+          this.topPopup = false
+        }, 2000)
+      }
     }
   }
 }
