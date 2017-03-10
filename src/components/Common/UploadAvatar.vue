@@ -12,19 +12,17 @@
     <mu-flat-button slot="actions" @click="close" primary label="取消"/>
     <mu-flat-button slot="actions" primary @click="close" label="确定"/>
   </mu-dialog>
-  <mu-popup position="top" :overlay = "false" :open="toppop">
-      {{toppopmsg}}
-  </mu-popup>
 </div>
 </template>
 
 <script>
 import axios from 'axios'
+import {Message} from 'element-ui'
+
+
 export default {
   data () {
     return {
-      toppop:false,
-      toppopmsg:'',
       dialog: false,
       isUploadButton:false,
        avater:'http://cttf-10068775.cos.myqcloud.com/QQ%E6%88%AA%E5%9B%BE20161221144932.png',
@@ -64,12 +62,11 @@ export default {
         .then(function(res){
           console.log(res);
           if(res.data.code != 0)
-            tvm.toppopmsg = '更新失败, 请联系管理员';
+            Message.error("更新失败");
           else{
-              tvm.toppopmsg = '更新成功';
+              Message.success("更新成功")
               tvm.saveAvatar(res.data.data.access_url);
             }
-            tvm.toppop = true;
         }).catch(function(msg){
           console.error(msg)
         })
@@ -82,15 +79,6 @@ export default {
       axios.post('/api/User/saveavatar',{value:url});
     }
   },
-  watch: {
-    toppop (val) {
-      if (val) {
-        setTimeout(() => {
-          this.topPopup = false
-        }, 2000)
-      }
-    }
-  }
 }
 </script>
 <style>
