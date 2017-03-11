@@ -12,7 +12,6 @@
 <script>
     import axios from 'axios'
 
-
     export default{
         data(){
             return{
@@ -28,11 +27,9 @@
                         "email":udata.useremail,
                         "password":udata.password
                 }).then(function(res){
-                    console.log(res.data.access_token);
-
+                    console.log(res.data);
                     udata.$store.commit('updateToken',res.data.access_token);
-                    udata.$store.commit('login',res.data.userid);
-                    
+                    udata.$store.commit('login',res.data);
                     udata.$router.push('/task/taskList');
                 });
             },

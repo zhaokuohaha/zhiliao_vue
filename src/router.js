@@ -8,6 +8,7 @@ import Home from './components/Home'
 import Account from './components/Account/index'
 import Login from './components/Account/login'
 import Register from './components/Account/register'
+import Info from './components/Account/info'
 
 //Task
 import TaskIndex from './components/Task/index'
@@ -37,6 +38,9 @@ const routes = [{
         },{
             path:'register',
             component:Register
+        },{
+            path:'info',
+            component:Info
         }]
     },{
         path: '/task',

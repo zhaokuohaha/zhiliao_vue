@@ -7,11 +7,11 @@
         <div class="userinfomation" v-if="this.$store.state.islogin">
           <mu-card>
             <mu-card-media>
-              <div is="component-upload"></div>
+              <div is="component-upload" :avatar="avatar"></div>
               <mu-card-title :title="username" :subTitle="summary" />
             </mu-card-media>
             <mu-card-actions class="text-center">
-              <router-link to="/userinfo">个人信息</router-link>
+              <router-link to="/account/info">个人信息</router-link>
               <mu-flat-button label="退出登录" @click="logoff" />
             </mu-card-actions>
           </mu-card>
@@ -52,15 +52,13 @@
 
 <script>
   import uploadAvatar from './components/Common/UploadAvatar'
-
+  import { mapState } from 'vuex'
+  
   export default {
     data() {
       return {
-        username: 'zhaokuo',
-        summary: '知了应用开发者',
         open: false,
         docked: true,
-
       }
     },
     methods: {
@@ -78,7 +76,12 @@
     },
     components: {
       'component-upload': uploadAvatar
-    }
+    },
+    computed: mapState({
+        avatar:state => state.avatar,
+        username: state => state.nickname,
+        summary: state => state.subTitle,
+    })
   }
 </script>
 

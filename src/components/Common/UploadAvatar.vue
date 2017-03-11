@@ -1,17 +1,12 @@
 <template>
 <div>
   <div class="avatar-container">
-    <div class="save-avatar" @click="open">
+    <div class="save-avatar">
         <input id="upload"  type="file" @change="onFileChange">
     </div>
-    <img  :src="avater" class="avatarImage">
+    <img  :src="avatar" class="avatarImage">
   </div>
   <mu-raised-button v-if="isUploadButton" primary icon="cloud_upload" label="确定上传头像" @click="uploadAvatar"></mu-raised-button>
-  <mu-dialog  :open="dialog" title="Dialog" @close="close">
-    这是一个简单的弹出框
-    <mu-flat-button slot="actions" @click="close" primary label="取消"/>
-    <mu-flat-button slot="actions" primary @click="close" label="确定"/>
-  </mu-dialog>
 </div>
 </template>
 
@@ -21,43 +16,43 @@ import {Message} from 'element-ui'
 
 
 export default {
+  props:{
+    avatar:String,
+    isgroup:Boolean,
+    groupid:String
+  },
   data () {
     return {
-      dialog: false,
       isUploadButton:false,
-       avater:'http://cttf-10068775.cos.myqcloud.com/QQ%E6%88%AA%E5%9B%BE20161221144932.png',
+      formdata:null,
     }
   },
   methods: {
-    open () {
-      //this.dialog = true
-    },
-    close () {
-      this.dialog = false
-    }, 
     onFileChange(e) {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length)
         return;
       this.createImage(files[0]);
+      this.formdata = files[0];
       this.isUploadButton = true;
     },
     createImage(file) {
       var image = new Image();
       var reader = new FileReader();
       var vm = this;
-
       reader.onload = (e) => {
-        vm.avater = e.target.result;
+        vm.avatar = e.target.result;
       };
       reader.readAsDataURL(file);
     },
     uploadAvatar(){
       var tvm = this;
-      var element = document.getElementById('upload');
       var formData = new FormData();
-      formData.append('files', element.files[0]);
-      var instance = axios.create({headers:{'groupname':'testgroup'}});
+      formData.append('files', tvm.formdata);
+      var instance;
+      if(tvm.isgroup)
+        instance = axios.create({headers:{'groupid':tvm.groupid}});
+      else instance = axios.create({});
       instance.post('/api/User/uploadimage',formData)
         .then(function(res){
           console.log(res);
@@ -65,14 +60,15 @@ export default {
             Message.error("更新失败");
           else{
               Message.success("更新成功")
-              tvm.saveAvatar(res.data.data.access_url);
+              if(tvm.isgroup){
+                tvm.$emit('updateGroupid',res.data.data.access_url);
+              }
+              else
+                tvm.saveAvatar(res.data.data.access_url);
             }
         }).catch(function(msg){
           console.error(msg)
         })
-      // var request = new XMLHttpRequest();
-      // request.open("POST", "http://localhost:50521/api/User/uploadimage"); // change to your URL
-      // request.send(formData);
       this.isUploadButton = false;
     },
     saveAvatar(url){
