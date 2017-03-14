@@ -19,7 +19,7 @@
                 <mu-sub-header>我加入的群</mu-sub-header>
                 <mu-list-item 
                     v-for="(item,index) in groups" 
-                    v-if="item.ismine == true" 
+                    v-if="!item.ismine" 
                     :title="item.name"
                     disabled>
                     <mu-avatar :src="item.imagepath" slot="leftAvatar"/>

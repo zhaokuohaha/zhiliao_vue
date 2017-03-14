@@ -46,8 +46,9 @@
                     nickname:regform.nickname,
                     summary:regform.summary
                 }).then(function(res){
-                    console.log('register success');
-                    console.log(res);
+                    regform.$store.commit('updateToken',res.data.access_token);
+                    regform.$store.commit('login',res.data);
+                    regform.$router.push('/task/taskList');
                 }).catch(function(message){
                     console.warn('register error');
                     console.warn(message);

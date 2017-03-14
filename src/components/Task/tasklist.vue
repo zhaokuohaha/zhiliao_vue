@@ -1,8 +1,8 @@
 <template>
     <div class="tasklist">
-        <h1>任务列表<mu-icon-button icon="refresh" size="48" @click="getTasks"></mu-icon-button></h1>
+        <h1>通知列表<mu-icon-button icon="refresh" size="48" @click="getTasks"></mu-icon-button></h1>
         <mu-list>
-            <mu-list-item v-for="(item,index) in tasks" :title="item.owner">
+            <mu-list-item v-for="(item,index) in tasks" :title="item.group">
                  <mu-avatar :src="item.avatar" slot="leftAvatar"/>
                  <span slot="describe">
                     <mu-icon v-if="item.state"  color="greenA400" value="check_circle"></mu-icon>
@@ -18,7 +18,7 @@
         </mu-list>
         <mu-dialog :open="dialog" @close="hideDetail">
             <mu-list>
-                <mu-list-item :title=activetask.owner disabled>
+                <mu-list-item :title=activetask.group disabled>
                     <mu-avatar slot="left" :size="42" :src="activetask.avatar" />
                 </mu-list-item>
             </mu-list>
@@ -33,6 +33,7 @@
 
 <script>
     import axios from 'axios';
+    import {Message} from 'element-ui'
 
     export default {
         data () {
@@ -46,7 +47,7 @@
                     time:'2017-2-16',
                     address:'静安寺中欣大厦',
                     content:'2月16日上午9:30请准时到公司报道',
-                    owner: '国双科技公司人力资源部',
+                    group: '国双科技公司人力资源部',
                     avatar: 'http://zhiliao-10068775.cos.myqcloud.com/logo.png'
                 },{
                     id:'1',
@@ -55,7 +56,7 @@
                     time:'2017-2-16',
                     address:'静安寺中欣大厦',
                     content:'2月16日上午9:30请准时到公司报道',
-                    owner: '国双科技公司人力资源部',
+                    group: '国双科技公司人力资源部',
                     avatar: 'http://zhiliao-10068775.cos.myqcloud.com/logo.png'
                 }]
             }
@@ -66,20 +67,22 @@
         },
         methods: {
             getTasks(){
+                var tvm = this;
                 axios.get('/api/Task/tasklist').then(function(res){
-                    console.log("请求任务列表成功");
-                    console.log(res);
+                    tvm.tasks = res.data.data;
+                    Message.success("请求通知列表成功");
+                    // console.log(res);
                 }).catch(function(response){
-                    console.log("请求任务列表失败");
-                    console.error(response);
+                    Message.error("请求通知列表失败, 请重试");
+                    console.error(response);    
                 })
             },
             setRead(item){
-                axios.post('/api/Task/setreaded',{value:1}).then(function(res){
-                    console.log("设置已读成功");
+                axios.post('/api/Task/setreaded',{value:item.id}).then(function(res){
+                    Message.info("设置已读成功");
                     item.state = true;
                 }).catch(function(error){
-                    console.error("设置已读失败");
+                    Message.error("设置已读失败");
                 })
             },
             showDetail(task){

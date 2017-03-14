@@ -32,7 +32,7 @@
         <mu-list>
           <mu-list-item   title="通知管理" toggleNested>
             <mu-list-item slot="nested" title="所有通知" href="#/task/taskList"></mu-list-item>            
-            <mu-list-item slot="nested" title="新建通知" href="#/task/newTask"></mu-list-item>
+            <mu-list-item slot="nested" title="新建通知" href="#/task/create"></mu-list-item>
             <mu-list-item slot="nested" title="已发送通知" href="#/task/sentTasks"></mu-list-item>
           </mu-list-item>
           <mu-list-item title="群管理" toggleNested>
@@ -81,7 +81,10 @@
         avatar:state => state.avatar,
         username: state => state.nickname,
         summary: state => state.subTitle,
-    })
+    }),
+    created(){
+      
+    }
   }
 </script>
 

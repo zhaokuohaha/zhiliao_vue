@@ -13,6 +13,8 @@ import Info from './components/Account/info'
 //Task
 import TaskIndex from './components/Task/index'
 import Tasklist from './components/Task/tasklist'
+import CreateTask from './components/Task/createtask'
+import SentTasks from './components/Task/senttask'
 
 //Group
 import GroupIndex from './components/Group/index'
@@ -48,6 +50,12 @@ const routes = [{
         children:[{
             path:'taskList',
             component:Tasklist,
+        },{
+            path:'create',
+            component:CreateTask,
+        },{
+            path:'sentTasks',
+            component:SentTasks
         }]
     },{
         path:'/group',

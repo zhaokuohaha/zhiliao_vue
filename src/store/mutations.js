@@ -6,9 +6,13 @@ export default{
       state.islogin = true;
       state.userid = user.userid;
       state.nickname = user.nickname;
-      state.avatar = user.avatar;
+      if(user.avatar)
+        state.avatar = user.avatar;
       state.summary = user.summary;
       axios.defaults.headers.common["userid"] = user.userid;
+      localStorage.save('username',user.nickname);
+      localStorage.save('userid',user.userid);
+      localStorage.save('avatar',user.avatar);
     },
     logoff(state){
       state.islogin = false;
@@ -17,5 +21,5 @@ export default{
       state.jwtToken = "Bearer "+token;
       axios.defaults.headers.common['Authorization'] = state.jwtToken;
       localStorage.save('token',token);
-    }
+    },
 }
