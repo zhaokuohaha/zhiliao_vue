@@ -23,6 +23,9 @@ import myGroup from './components/Group/mygroup'
 import userList from './components/Group/userlist'
 import JoinGroup from './components/Group/joingroup'
 
+//other
+import usercard  from './components/Common/UserCard'
+
 Vue.use(VueRouter)
 //路由配置
 const routes = [{
@@ -31,6 +34,9 @@ const routes = [{
     },{
         path:'/home',
         component:Home,
+    },{
+        path:'/test',
+        component:usercard
     },{
         path:'/account',
         component:Account,

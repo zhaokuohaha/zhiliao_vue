@@ -3,6 +3,7 @@
     <mu-appbar title="Title">
       <mu-icon-button icon='menu' slot="left" @click="toggle(true)" /></mu-icon-button>
       <mu-icon-button icon='home' slot="left" @click="toHome"></mu-icon-button>
+      
       <mu-drawer :open="open" :docked="docked" @close="toggle()" >
         <div class="userinfomation" v-if="this.$store.state.islogin">
           <mu-card>
@@ -43,7 +44,9 @@
         </mu-list>
       </mu-drawer>
     </mu-appbar>
-    <router-view></router-view>
+    <div class="content">
+      <router-view></router-view>
+    </div>
     <div class="footer">
       <hr> 版权所有 &copy www.zhaokuo.cc
     </div>
@@ -105,5 +108,9 @@
   }
   .zl-big-icon{
     font-size: 36px;
+  }
+
+  .content{
+    margin: 10px 80px;
   }
 </style>
