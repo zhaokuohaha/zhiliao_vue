@@ -20,7 +20,6 @@ import SentTasks from './components/Task/senttask'
 import GroupIndex from './components/Group/index'
 import CreateGroup from './components/Group/creategroup'
 import myGroup from './components/Group/mygroup'
-import userList from './components/Group/userlist'
 import JoinGroup from './components/Group/joingroup'
 
 //other
@@ -72,9 +71,6 @@ const routes = [{
         },{
             path:'myGroup',
             component:myGroup
-        },{
-            path:'userList',
-            component:userList
         },{
             path:'joinGroup',
             component:JoinGroup

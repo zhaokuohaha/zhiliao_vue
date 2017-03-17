@@ -30,9 +30,20 @@
                                 </p>
                             </mu-card-text>
                         </mu-card>
-                        <div class="text-center">
-                            <mu-circular-progress :size="90" v-show="userlistshow"/>
-                        </div>
+                        <mu-row>
+                            <div class="text-center">
+                                <mu-circular-progress :size="90" v-show="userlistshow"/>
+                            </div>
+                            <mu-col v-show="!userlistshow" desktop="100">
+                                <user-card v-for="item in userlist" :user="item"></user-card>
+                            </mu-col>
+                        </mu-row>
+                        <mu-col v-show="userlist.length>0" desktop="100" class="text-center">
+                            <mu-list-item @click="sendWranSms">
+                                <mu-icon color="red600" :size="48" value="textsms"></mu-icon>
+                                <span style="font-size:30px; margin-left:20px;">发 送 短 信 提 醒</span>
+                            </mu-list-item>
+                        </mu-col>
                     </template>
                 </mu-col>
             </mu-row>
@@ -43,13 +54,14 @@
 <script>
     import axios from 'axios'
     import {Message} from 'element-ui'
-
+    import UserCard from '../Common/UserCard'
     export default {
         data(){
             return{
                 tasks:[],
                 activeTask:null,
                 userlistshow:false,
+                userlist:[],
             }
         },
         methods:{
@@ -72,16 +84,33 @@
                 let taskid = item.task.id;
                 let tvm = this;
                 tvm.userlistshow = true;
+                tvm.activeTask = item;
                 axios.post('/api/Task/sentdetail',{value:taskid})
                 .then(function(response){
                     console.log(response)
+                    tvm.userlist = response.data.data;
                     Message.success("查看用户列表成功")
-                    tvm.activeTask = item;
                 tvm.userlistshow = false;                    
                 }).catch(function(msg){
                     console.error(msg);
                 })
+            },
+            sendWranSms(){
+                let num = [];
+                for(let item of this.userlist)
+                    num.push(item.phonenum);
+                axios.post("/api/Task/smsremind",{num:num})
+                .then(function(response){
+                    console.log(response.data);
+                    Message.success("提醒成功");
+                }).catch(function(msg){
+                    conscole.log(num);
+                    Message.error("提醒失败");
+                });
             }
+        },
+        components:{
+            'user-card':UserCard
         },
         mounted(){
             this.getSentTask();

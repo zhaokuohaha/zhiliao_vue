@@ -1,32 +1,41 @@
 <template>
     <div>
-        <h1>我的群列表</h1>
-        <mobile-tear-sheet>
-            <mu-list>
-                <mu-sub-header>我创建的群</mu-sub-header>
-                <mu-list-item 
-                    v-for="(item,index) in groups" 
-                    v-if="item.ismine" 
-                    :title="item.name"
-                    @click = "showUsers()">
-                    <mu-avatar :src="item.imagepath" slot="leftAvatar"/>
-                    <span slot="describe">简介: {{item.summary}} <br>人数: {{item.usercount}}</span>
-                    <mu-icon-button tooltip="删除群" iconClass="zl-delete-icon" slot="right" icon="delete" @click="deleteGroup()"/>
-                </mu-list-item>
+        <mu-flexbox>
+            <mu-flexbox-item>
+                <h1>我的群列表</h1>
+                 <mu-list>
+                    <mu-sub-header>我创建的群</mu-sub-header>
+                    <mu-list-item 
+                        v-for="(item,index) in groups" 
+                        v-if="item.ismine" 
+                        :title="item.name"
+                        @click = "showUsers(item.groupid)">
+                        <mu-avatar :src="item.imagepath" slot="leftAvatar"/>
+                        <span slot="describe">简介: {{item.summary}} <br>人数: {{item.usercount}}</span>
+                        <mu-icon-button tooltip="删除群" iconClass="zl-delete-icon" slot="right" icon="delete" @click="deleteGroup()"/>
+                    </mu-list-item>
 
-                <mu-divider inset/>
+                    <mu-divider inset/>
 
-                <mu-sub-header>我加入的群</mu-sub-header>
-                <mu-list-item 
-                    v-for="(item,index) in groups" 
-                    v-if="!item.ismine" 
-                    :title="item.name"
-                    disabled>
-                    <mu-avatar :src="item.imagepath" slot="leftAvatar"/>
-                    <span slot="describe">简介: {{item.summary}}</span>
-                </mu-list-item>
-            </mu-list>
-        </mobile-tear-sheet>
+                    <mu-sub-header>我加入的群</mu-sub-header>
+                    <mu-list-item 
+                        v-for="(item,index) in groups" 
+                        v-if="!item.ismine" 
+                        :title="item.name"
+                        disabled>
+                        <mu-avatar :src="item.imagepath" slot="leftAvatar"/>
+                        <span slot="describe">
+                            群主: {{item.master}}
+                            简介: {{item.summary}}
+                        </span>
+                    </mu-list-item>
+                </mu-list>
+            </mu-flexbox-item>
+
+            <mu-flexbox-item>
+                    <user-card v-for="user in users" :user="user"></user-card>
+            </mu-flexbox-item>
+        </mu-flexbox>
 
         <!--弹出框-->
         <mu-dialog :open="dialog" title="Alert Dialog">
@@ -44,12 +53,13 @@
 
 <script>
     import axios from 'axios'
-
+    import UserCard from '../Common/UserCard'
     export default {
         data () {
             return {
                 dialog:false,
                 groups:[],
+                users:[]
             }
         },
         methods:{
@@ -64,9 +74,12 @@
                         console.error(msg);
                     })
             },
-            showUsers(){
-                this.$router.push('userList');
-                console.log("显示用户数量");
+            showUsers(groupid){
+                let tvm = this;
+                axios.get("/api/Group/getuserlist/"+groupid)
+                .then(function(response){
+                    tvm.users = response.data.data;
+                });
             },
             deleteGroup(){
                 console.log("删除群");
@@ -79,8 +92,10 @@
                 this.dialog=false;
             }
         },
+        components:{
+            'user-card':UserCard
+        },
         mounted () {
-            console.log("mounted");
             this.getGroups();
         }
     }
