@@ -12,7 +12,7 @@
                         @click = "showUsers(item.groupid)">
                         <mu-avatar :src="item.imagepath" slot="leftAvatar"/>
                         <span slot="describe">简介: {{item.summary}} <br>人数: {{item.usercount}}</span>
-                        <mu-icon-button tooltip="删除群" iconClass="zl-delete-icon" slot="right" icon="delete" @click="deleteGroup()"/>
+                        <mu-icon-button tooltip="删除群" iconClass="zl-delete-icon" slot="right" icon="delete" @click="deleteGroup(item,index)"/>
                     </mu-list-item>
 
                     <mu-divider inset/>
@@ -39,9 +39,9 @@
         </mu-flexbox>
 
         <!--弹出框-->
-        <mu-dialog :open="dialog" title="Alert Dialog">
+        <mu-dialog :open="dialog" :title="curGroup.name">
             <h2>
-                <mu-icon value='error_outline' color="red"></mu-icon> 确定删除群
+                <mu-icon value='error_outline' color="red"></mu-icon> 确定删除 "{{curGroup.name}}" ?
                 <mu-divider />
             </h2>
             删除后, 与群相关的通知信息, 群组织信息将被删除, <br>
@@ -56,13 +56,14 @@
     import axios from 'axios'
     import UserCard from '../Common/UserCard'
     import JoinGroup from './joingroup'
-
+    import {Message} from 'element-ui'
     export default {
         data () {
             return {
                 dialog:false,
                 groups:[],
-                users:[]
+                users:[],
+                curGroup:{name:''}
             }
         },
         methods:{
@@ -84,15 +85,22 @@
                     tvm.users = response.data.data;
                 });
             },
-            deleteGroup(){
-                console.log("删除群");
+            deleteGroup(item,index){
+                this.curGroup = item;
+                this.curGroup["index"]=index;
                 this.dialog=true;
                 stopPropagation();
             },
             closeDialog(){this.dialog=false},
             doDeleteGroup(){
-                console.log("执行删除群操作");
-                this.dialog=false;
+                let tvm = this;
+                axios.post('/api/Group/deletegroup/'+tvm.curGroup.groupid)
+                .then(function(response){
+                    tvm.groups.splice(tvm.curGroup.index,1);
+                    tvm.curGroup = {name:''};
+                    tvm.dialog=false;
+                    Message("删除成功");
+                });
             }
         },
         components:{

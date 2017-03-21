@@ -1,6 +1,6 @@
 <template>
     <div class="text-center">
-        <h3>编辑通知</h3>
+        <h2>编辑通知</h2>
         <mu-text-field labelFloat v-model="task.title" label="标题" :maxLength="10" @textOverflow="handleInputOverflow"></mu-text-field><br>
         <mu-date-picker  labelFloat v-model="task.date"  label="日期"></mu-date-picker><br>
         <mu-time-picker labelFloat format="24hr" v-model="task.time" label="时间"></mu-time-picker><br>
@@ -11,8 +11,8 @@
         </mu-select-field>
         <mu-icon-button @click="getgroup" icon="refresh"/><br>
         <mu-switch labelLeft v-model="task.isemail" label="邮件通知"></mu-switch>&emsp;&emsp;&emsp;&emsp;
-        <mu-switch labelLeft v-model="task.issms" label="短信通知"></mu-switch><br>
-        <mu-raised-button @click="sendTask" icon="send" label="发送"></mu-raised-button>
+        <mu-switch labelLeft v-model="task.issms" label="短信通知"></mu-switch><br><br><br>
+        <mu-raised-button @click="sendTask" primary class="ct-btn-block" icon="send" label="发送"></mu-raised-button>
     </div>
 </template>
 
@@ -58,8 +58,14 @@ export default{
             axios.get('/api/Group/groupList')
             .then(function(response){
                 console.log(response);
-                if(response.data.res === 'true')
-                    tvm.mygroups = response.data.data;
+                if(response.data.res === 'true'){
+                    let gls = response.data.data;
+                    for(let item of gls){
+                        if(item.ismine)              //只能发送给我创建的群
+                            tvm.mygroups.push(item);
+                    }
+                }
+                    
                 else
                     Message.warning("请求数据失败")
             }).catch(function(msg){
@@ -73,3 +79,11 @@ export default{
 }
     
 </script>
+
+<style>
+.ct-btn-block{
+    width:50%;
+    margin:50px;
+    font-size:1.6em;
+}
+</style>

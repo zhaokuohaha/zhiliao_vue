@@ -22,6 +22,7 @@
 
 <script>
     import axios from 'axios'
+    import {Message,Notification} from 'element-ui'
 
     export default{
         data () {
@@ -53,13 +54,16 @@
                     'groupName': _this.group.groupName,
                     'secKey': _this.group.secKey
                 }).then(function(response){
+                        let info = response.data.data;
                         if(response.data.res == 'true'){
-                            let info = response.data.data;
                             console.info(info);
                            _this.group.summary = info.summary;
                            _this.group.master = info.master;
                            _this.group.imagepath = info.imagepath;
                            _this.group.show = true;
+                        }
+                        else{
+                            Notification.warning(info)
                         }
                         _this.dialog = false;
                     });
