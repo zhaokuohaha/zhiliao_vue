@@ -25,11 +25,12 @@
                         disabled>
                         <mu-avatar :src="item.imagepath" slot="leftAvatar"/>
                         <span slot="describe">
-                            群主: {{item.master}}
+                            群主: {{item.master}} <br>
                             简介: {{item.summary}}
                         </span>
                     </mu-list-item>
                 </mu-list>
+                <join-group></join-group>
             </mu-flexbox-item>
 
             <mu-flexbox-item>
@@ -54,6 +55,8 @@
 <script>
     import axios from 'axios'
     import UserCard from '../Common/UserCard'
+    import JoinGroup from './joingroup'
+
     export default {
         data () {
             return {
@@ -93,7 +96,8 @@
             }
         },
         components:{
-            'user-card':UserCard
+            'user-card':UserCard,
+            'join-group':JoinGroup
         },
         mounted () {
             this.getGroups();

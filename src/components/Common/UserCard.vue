@@ -33,7 +33,7 @@
 <style>
 /*= common css to all effects =*/
 .single-member{width: 280px; float: left; margin: 30px 2.5%; background-color: #e3f2fd; text-align: center; position: relative;}
-.member-image img{text-align:center; vertical-align: middle; margin:auto;}
+.member-image img{width:100%; height:100%;}
 .uc_h3 {font-size: 24px; font-weight: normal; margin: 10px 0 0; text-transform: uppercase;}
 .uc_h5 {font-size: 18px; font-weight: 300; margin: 0 0 15px; line-height: 22px;}
 .uc_p {font-size: 15px; font-weight: 500; line-height: 22px; padding: 0 30px; margin-bottom: 10px;}
@@ -58,5 +58,7 @@
 .user-card{
     padding-top:80px;
 }
+
+
 
 </style>

@@ -4,7 +4,7 @@
         <mu-text-field labelFloat v-model="task.title" label="标题" :maxLength="10" @textOverflow="handleInputOverflow"></mu-text-field><br>
         <mu-date-picker  labelFloat v-model="task.date"  label="日期"></mu-date-picker><br>
         <mu-time-picker labelFloat format="24hr" v-model="task.time" label="时间"></mu-time-picker><br>
-        <mu-text-field labelFloat v-model="task.address" label="地址"></mu-text-field><br>
+        <mu-text-field labelFloat v-model="task.address" label="地址" :maxLength="12"></mu-text-field><br>
         <mu-text-field labelFloat v-model="task.content" label="通知内容" multiLine ></mu-text-field><br>
         <mu-select-field labelFloat v-model="task.group" label="发送的群" multiple><br>
             <mu-menu-item v-for="item in mygroups" :value="item.groupid" :title="item.name"></mu-menu-item>

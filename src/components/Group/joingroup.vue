@@ -10,7 +10,6 @@
             </div>
         </div>
         <mu-raised-button  label="加入群"  icon="group_add" primary @click="showDialog"/>
-        <mu-raised-button label="返回首页" href="#/" icon='exit_to_app'></mu-raised-button>
         <mu-dialog :open="dialog" title="加入群" @close="closeDialog">
             <mu-text-field labelFloat icon="group" iconClass="zl-big-icon" v-model="group.groupName" label="群名称"/><br/>
             <mu-text-field labelFloat icon="vpn_key" iconClass="zl-big-icon" v-model="group.secKey" label="口令"/><br/>

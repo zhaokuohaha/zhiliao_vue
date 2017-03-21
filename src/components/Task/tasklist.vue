@@ -1,6 +1,6 @@
 <template>
     <div class="tasklist">
-        <h1>通知列表<mu-icon-button icon="refresh" size="48" @click="getTasks"></mu-icon-button></h1>
+        <h2>通知列表</h2>
         <mu-list>
             <mu-list-item v-for="(item,index) in tasks" :title="item.group">
                  <mu-avatar :src="item.avatar" slot="leftAvatar"/>
@@ -16,6 +16,9 @@
                 <mu-flat-button v-if="item.state==false" icon="check" color="greenA400" @click="setRead(item)">标记已读</mu-flat-button>
             </mu-list-item>
         </mu-list>
+        <div class="text-right">
+            <mu-float-button icon="refresh"  @click="getTasks" />
+        </div>
         <mu-dialog :open="dialog" @close="hideDetail">
             <mu-list>
                 <mu-list-item :title=activetask.group disabled>
@@ -40,25 +43,7 @@
             return {
                 dialog:false,
                 activetask:'',
-                tasks:[{
-                    id:'1',
-                    state:false,
-                    title: '重要通知',
-                    time:'2017-2-16',
-                    address:'静安寺中欣大厦',
-                    content:'2月16日上午9:30请准时到公司报道',
-                    group: '国双科技公司人力资源部',
-                    avatar: 'http://zhiliao-10068775.cos.myqcloud.com/logo.png'
-                },{
-                    id:'1',
-                    state:true,
-                    title: '重要通知',
-                    time:'2017-2-16',
-                    address:'静安寺中欣大厦',
-                    content:'2月16日上午9:30请准时到公司报道',
-                    group: '国双科技公司人力资源部',
-                    avatar: 'http://zhiliao-10068775.cos.myqcloud.com/logo.png'
-                }]
+                tasks:[]
             }
         },
         mounted () {

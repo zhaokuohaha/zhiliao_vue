@@ -39,7 +39,6 @@
           <mu-list-item title="群管理" toggleNested>
             <mu-list-item slot="nested" title="我的群" href="#/group/myGroup"></mu-list-item>
             <mu-list-item slot="nested" title="创建群" href="#/group/createGroup"></mu-list-item>
-            <mu-list-item slot="nested" title="加入群" href="#/group/joinGroup"></mu-list-item>
           </mu-list-item>
         </mu-list>
       </mu-drawer>

@@ -53,7 +53,7 @@
 
 <script>
     import axios from 'axios'
-    import {Message} from 'element-ui'
+    import {Message,Notification} from 'element-ui'
     import UserCard from '../Common/UserCard'
     export default {
         data(){
@@ -102,10 +102,10 @@
                 axios.post("/api/Task/smsremind",{num:num})
                 .then(function(response){
                     console.log(response.data);
-                    Message.success("提醒成功");
+                    Notification.success("提醒成功");
                 }).catch(function(msg){
                     conscole.log(num);
-                    Message.error("提醒失败");
+                    Notification.error("提醒失败");
                 });
             }
         },
