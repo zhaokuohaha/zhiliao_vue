@@ -55,7 +55,10 @@
 <script>
   import uploadAvatar from './components/Common/UploadAvatar'
   import { mapState } from 'vuex'
-  
+  import localStorage from './store/localStorage.js'
+  import {Message} from 'element-ui'
+  import axios from 'axios'
+
   export default {
     data() {
       return {
@@ -85,7 +88,19 @@
         summary: state => state.subTitle,
     }),
     created(){
-      
+      let tvm = this;
+      let token = localStorage.fetch('token')
+      if(token){
+        tvm.$store.commit('updateToken',token);
+        axios.get('/api/account/refreshauth').then(function(res){
+              tvm.$store.commit('updateToken',res.data.access_token);
+              tvm.$store.commit('login',res.data);
+              console.log("刷新成功");
+          });
+      }else{
+        Message("请登录");
+        tvm.$router.push('/account/login');
+      }
     }
   }
 </script>
