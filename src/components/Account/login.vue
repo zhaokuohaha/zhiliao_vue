@@ -5,7 +5,7 @@
         <mu-text-field labelFloat v-model="password" label="密码"/><br/>
         <mu-raised-button class="gap-button" label="登录" icon="android" primary
             @click="dologin"/>
-        <router-link to="/account/forgotpassword">找回密码</router-link>
+        <!--router-link to="/account/forgotpassword">找回密码</router-link-->
         <div class="loding" v-show="loding_show">
             <mu-circular-progress :size="100" :strokeWidth="5" style="top:45%"/>
         </div>
@@ -18,8 +18,8 @@
     export default{
         data(){
             return{
-                useremail:'1014336691@qq.com',
-                password:'123qwe',
+                useremail:'',
+                password:'',
                 loding_show:false
             }
         },

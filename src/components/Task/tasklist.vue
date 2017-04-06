@@ -54,9 +54,10 @@
             getTasks(){
                 var tvm = this;
                 axios.get('/api/Task/tasklist').then(function(res){
-                    tvm.tasks = res.data.data;
-                    Message.success("请求通知列表成功");
-                    // console.log(res);
+                    if(res.data.res == 'true'){
+                        tvm.tasks = res.data.data;
+                        Message.success("请求通知列表成功");
+                    }
                 }).catch(function(response){
                     Message.error("请求通知列表失败, 请重试");
                     console.error(response);    

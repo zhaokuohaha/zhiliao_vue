@@ -9,10 +9,9 @@ export default{
       if(user.avatar)
         state.avatar = user.avatar;
       state.summary = user.summary;
-      axios.defaults.headers.common["userid"] = user.userid;
-      localStorage.save('username',user.nickname);
-      localStorage.save('userid',user.userid);
-      localStorage.save('avatar',user.avatar);
+      // localStorage.save('username',user.nickname);
+      // localStorage.save('userid',user.userid);
+      // localStorage.save('avatar',user.avatar);
     },
     logoff(state){
       state.islogin = false;

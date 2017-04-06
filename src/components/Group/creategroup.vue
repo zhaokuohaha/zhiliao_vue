@@ -20,9 +20,9 @@
             return {
                 group:{
                     avatar:'',
-                    name:'测试群',
-                    summary:'用于测试通知的群', 
-                    secKey:'1234',      
+                    name:'',
+                    summary:'', 
+                    secKey:'',      
                 }
             }
         },

@@ -24,11 +24,11 @@ export default{
     data(){
         return{
             task:{
-                title:'测试通知',
-                date:'2017-06-03',
-                time:'10:00',
-                address:'计算机学院10楼1001',
-                content:'毕业设计答辩\n请勿迟到',
+                title:'',
+                date:'',
+                time:'',
+                address:'',
+                content:'',
                 isemail:true,
                 issms:false,
                 group:[],
