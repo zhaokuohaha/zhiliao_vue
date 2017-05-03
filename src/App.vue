@@ -91,14 +91,16 @@
       let tvm = this;
       let token = localStorage.fetch('token')
       if(token){
+        //刷新权限
         tvm.$store.commit('updateToken',token);
-        setTimeout(function(){
-          console.log("刷新权限");
-          axios.get('/api/account/refreshauth').then(function(res){
-                tvm.$store.commit('updateToken',res.data.access_token);
-                tvm.$store.commit('login',res.data);
-            });
-        }, 5000);
+        axios.get('/api/account/refreshauth')
+        .then(function(res){
+              tvm.$store.commit('updateToken',res.data.access_token);
+              tvm.$store.commit('login',res.data);
+          }).catch(function(msg){
+              Message.warning("帐号已失效, 请重新登录!");
+              tvm.$router.push('/account/login');
+          });
       }else{
         Message("请登录");
         tvm.$router.push('/account/login');

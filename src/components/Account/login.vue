@@ -14,12 +14,13 @@
 
 <script>
     import axios from 'axios'
+    import {MessageBox} from 'element-ui'
 
     export default{
         data(){
             return{
-                useremail:'',
-                password:'',
+                useremail:'1014336691@qq.com',
+                password:'123qwe',
                 loding_show:false
             }
         },
@@ -36,7 +37,10 @@
                     tvm.$store.commit('login',res.data);
                     tvm.loding_show = false;
                     tvm.$router.push('/task/taskList');
+                }).catch(function(msg){
+                    MessageBox.alert("登录失败， 请检查用户名密码或者联系管理员反馈");
                 });
+                tvm.loding_show = false;                
             },
         }  
     }

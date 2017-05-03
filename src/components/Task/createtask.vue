@@ -43,23 +43,28 @@ export default{
             }
         },
         sendTask(){
-            var tvm = this;
+            let tvm = this;
             axios.post("/api/Task/createtask",tvm.task)
                 .then(function(response){
-                    Message.success("创建成功");
-                    console.log(response);
+                    if(response.data.res == "true"){
+                        Message.success("通知发送成功");
+                        tvm.$router.push('/task/sentTasks');
+                    }
+                    else
+                        Message.error("通知发送失败："+response.data.data);
                 }).catch(function(msg){
-                    Message.error("创建失败");
+                    Message.error("操作失败，发生异常！");
                     console.error(msg);
                 })
         },
         getgroup(){
-            var tvm = this;
+            let tvm = this;
             axios.get('/api/Group/groupList')
             .then(function(response){
                 console.log(response);
                 if(response.data.res === 'true'){
                     let gls = response.data.data;
+                    tvm.mygroups=[];
                     for(let item of gls){
                         if(item.ismine)              //只能发送给我创建的群
                             tvm.mygroups.push(item);

@@ -2,22 +2,19 @@
     <div class="tasklist">
         <h2>通知列表</h2>
         <mu-list>
-            <mu-list-item v-for="(item,index) in tasks" :title="item.group">
-                 <mu-avatar :src="item.avatar" slot="leftAvatar"/>
-                 <span slot="describe">
-                    <mu-icon v-if="item.state"  color="greenA400" value="check_circle"></mu-icon>
-                    <mu-icon v-else color="red" value="cancel"></mu-icon>
-                 </span>
+            <div v-for="(item,index) in tasks"  @click="showDetail(item)"
+                :class="['task-list',item.state ? 'task-readed' : 'task-notread']">
+                <mu-list-item :title="item.group" disabled>
+                    <mu-avatar :src="item.avatar" slot="leftAvatar"/>
+                </mu-list-item>
                 <p>
-                    <h2>{{item.title}}</h2>
+                    <h3>{{item.title}}</h3>
                     {{item.content}}
                 </p>
-                <mu-flat-button icon="search" primary @click="showDetail(item)">查看</mu-flat-button>
-                <mu-flat-button v-if="item.state==false" icon="check" color="greenA400" @click="setRead(item)">标记已读</mu-flat-button>
-            </mu-list-item>
+            </div>
         </mu-list>
-        <div class="text-right">
-            <mu-float-button icon="refresh"  @click="getTasks" />
+        <div style="text-align:right; margin:10px 30px 10px 0;">
+            <mu-float-button slot="right" icon="refresh"  @click="getTasks" />
         </div>
         <mu-dialog :open="dialog" @close="hideDetail">
             <mu-list>
@@ -26,10 +23,11 @@
                 </mu-list-item>
             </mu-list>
              <mu-card-title :title="activetask.title"/>
-             <p><mu-icon value="access_time"></mu-icon>  {{activetask.time}}</p>
-             <p><mu-icon value="location_on"></mu-icon>  {{activetask.address}}</p>
+             <p><mu-icon value="access_time" color="greenA200"></mu-icon>  {{activetask.time}}</p>
+             <p><mu-icon value="location_on" color="greenA200"></mu-icon>  {{activetask.address}}</p>
              {{activetask.content}}
-            <mu-flat-button slot="actions" primary @click="hideDetail" label="确定"/>
+            <mu-flat-button slot="actions" v-if="activetask.state==false" icon="check" color="greenA400" @click="setRead(activetask)" label="标记已读" />
+            <mu-flat-button slot="actions" @click="hideDetail" label="取消"/>
         </mu-dialog>
     </div>
 </template>
@@ -82,3 +80,23 @@
         }
     };
 </script>
+
+<style>
+    .task-list{
+        cursor: pointer;
+        padding: 15px;
+    }
+
+    .task-readed{
+        background-color: #e8f5e9;
+    }
+    .task-readed:hover{
+        background-color: #c8e6c9;
+    }
+    .task-notread{
+        background-color: #ffebee;        
+    }
+    .task-notread:hover{
+        background-color: #ffcdd2;        
+    }
+</style>
