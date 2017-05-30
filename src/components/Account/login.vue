@@ -33,14 +33,15 @@
                         "password":tvm.password
                 }).then(function(res){
                     console.log(res.data);
+                    //更新状态信息
                     tvm.$store.commit('updateToken',res.data.access_token);
                     tvm.$store.commit('login',res.data);
                     tvm.loding_show = false;
                     tvm.$router.push('/task/taskList');
                 }).catch(function(msg){
+                    tvm.loding_show = false;                    
                     MessageBox.alert("登录失败， 请检查用户名密码或者联系管理员反馈");
                 });
-                tvm.loding_show = false;                
             },
         }  
     }

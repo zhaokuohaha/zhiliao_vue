@@ -15,7 +15,7 @@ Vue.use(MuseUI)
 import axios from 'axios'
 //axios配置
 axios.defaults.baseURL='http://localhost:50521';
-// axios.defaults.baseURL='http://zhiliao.server.zhaokuo.cc';
+// axios.defaults.baseURL='http://zhiliao.server.yyonghua.com';
 
 
 

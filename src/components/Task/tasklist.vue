@@ -62,9 +62,11 @@
                 })
             },
             setRead(item){
+                let tvm = this;
                 axios.post('/api/Task/setreaded',{value:item.id}).then(function(res){
                     Message.info("设置已读成功");
                     item.state = true;
+                    tvm.hideDetail();
                 }).catch(function(error){
                     Message.error("设置已读失败");
                 })

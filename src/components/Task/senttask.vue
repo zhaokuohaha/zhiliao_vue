@@ -33,6 +33,7 @@
                         <mu-row>
                             <div class="text-center">
                                 <mu-circular-progress :size="90" v-show="userlistshow"/>
+                                <h2 v-show="!userlistshow">未确认收到通知名单：</h2>
                             </div>
                             <mu-col v-show="!userlistshow" desktop="100">
                                 <user-card v-for="item in userlist" :user="item"></user-card>
@@ -55,6 +56,7 @@
     import axios from 'axios'
     import {Message,Notification} from 'element-ui'
     import UserCard from '../Common/UserCard'
+    
     export default {
         data(){
             return{
@@ -67,6 +69,7 @@
         methods:{
             getSentTask(){
                 let tvm = this;
+
                 axios.get('/api/Task/senttask')
                 .then(function(response){
                     console.log(response.data.data);

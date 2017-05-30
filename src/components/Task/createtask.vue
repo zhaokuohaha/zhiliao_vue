@@ -18,7 +18,7 @@
 
 <script>
 import axios from 'axios'
-import {Message} from 'element-ui'
+import {Message,Loading} from 'element-ui'
 
 export default{
     data(){
@@ -44,8 +44,10 @@ export default{
         },
         sendTask(){
             let tvm = this;
+            let loading = Loading.service({fullscreen:'true', text:'正在发送...'});
             axios.post("/api/Task/createtask",tvm.task)
                 .then(function(response){
+                    loading.close();
                     if(response.data.res == "true"){
                         Message.success("通知发送成功");
                         tvm.$router.push('/task/sentTasks');
@@ -54,6 +56,7 @@ export default{
                         Message.error("通知发送失败："+response.data.data);
                 }).catch(function(msg){
                     Message.error("操作失败，发生异常！");
+                    loading.close();                    
                     console.error(msg);
                 })
         },

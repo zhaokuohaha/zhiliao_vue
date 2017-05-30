@@ -14,6 +14,7 @@
 <script>
     import axios from 'axios'
     import uploadAvatar from '../Common/UploadAvatar'
+    import {Message} from 'element-ui'
 
     export default {
         data () {
@@ -31,11 +32,17 @@
         },
         methods: {
             creategroup(){
-                var g = this.group;
-                axios.post('/api/Group/greategroup',g)
+                let g = this.group;
+                let tvm = this;
+                axios.post('/api/Group/creategroup',g)
                     .then(function(response){
-                        console.log(response);
-                        
+                        console.log(response.data.res);
+                        if(response.data.res == 'true'){
+                            Message.success('创建群成功！');
+                            tvm.$router.push('/group/myGroup');
+                        }else{
+                            Message.error("创建失败，请先上传头像， 或检查表单是否含有非法字符");
+                        }
                     })
                     .catch(function(msg){
                         console.error(msg);
