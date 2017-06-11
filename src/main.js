@@ -4,7 +4,6 @@ import {router} from './router'
 // UI: muse-ui
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
-import App from './App'
 //状态管理: vuex 
 import store from './store'
 //本地存储: localStorage
@@ -14,9 +13,10 @@ Vue.use(MuseUI)
 //ajax : axios
 import axios from 'axios'
 //axios配置
-axios.defaults.baseURL='http://localhost:50521';
-// axios.defaults.baseURL='http://zhiliao.server.yyonghua.com';
+// axios.defaults.baseURL='http://localhost:50521';
+axios.defaults.baseURL='http://zhiliao.server.yyonghua.com';
 
+import App from './App'
 
 
 /* eslint-disable no-new */
